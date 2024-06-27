@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import Navbar from "./components/Navbar";
 
 const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement
@@ -11,6 +12,7 @@ const root = ReactDOM.createRoot(
 root.render(
     // strictMode에서는 두번 렌더링 될 수 있으나, 프로덕션빌드 모드에서는 그렇지 않을것
     <React.StrictMode>
+        <Navbar />
         <App />
     </React.StrictMode>
 );
