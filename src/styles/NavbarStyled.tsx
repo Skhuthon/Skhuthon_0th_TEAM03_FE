@@ -13,7 +13,7 @@ export const Container = styled.div`
     justify-content: space-between;
 
     background-color: #080101;
-    box-shadow: 0px 4px 50px rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 4px 50px rgba(45, 45, 45, 0.126);
     color: #3b3b3b;
 
     .logoBox {
