@@ -3,15 +3,16 @@ import { Link } from "react-router-dom";
 
 export const Container = styled.div`
     width: 100vw;
-    height: 100vh;
+    height: 90vh;
+    /* margin: 0; */
+    margin-top: 10vh;
     background: radial-gradient(50% 50% at 50% 50%, #3b3b3b 0%, #080101 100%);
-    margin: 0;
 
     display: flex;
 
     .textBox {
         width: 40vw;
-        height: 100vh;
+        height: inherit;
         padding: 0 10vw;
 
         display: flex;
@@ -33,7 +34,7 @@ export const Container = styled.div`
     }
     .cubeBox {
         width: 50vw;
-        height: 100vh;
+        height: inherit;
     }
 
     .startBtn {
