@@ -1,6 +1,7 @@
 import React from "react";
 import Cube from "./Cube";
 import { Container } from "../styles/ThemeRecsStyled";
+import { IoIosArrowForward } from "react-icons/io";
 
 const ThemeRecs = () => {
     return (
@@ -14,7 +15,9 @@ const ThemeRecs = () => {
             </div>
             <div className="startBtn">
                 <p className="start">시작하기</p>
-                <div className="icon">&gt;</div>
+                <div className="icon">
+                    <IoIosArrowForward />
+                </div>
             </div>
         </Container>
     );

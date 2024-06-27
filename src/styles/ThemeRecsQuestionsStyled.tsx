@@ -5,13 +5,13 @@ export const Container = styled.div`
     width: 100vw;
     height: 90vh;
     /* margin: 0; */
-    margin-top: 10vh;
+    /* margin-top: 10vh; */
     background: radial-gradient(50% 50% at 50% 50%, #3b3b3b 0%, #080101 100%);
 
     display: flex;
 
     .textBox {
-        width: 40vw;
+        /* width: 60vw; */
         height: inherit;
         padding: 0 10vw;
 
@@ -23,22 +23,39 @@ export const Container = styled.div`
 
     .subTitle {
         color: white;
-        font-size: 2.3rem;
+        font-size: 2.1rem;
     }
 
     .title {
         margin-top: 1rem;
         color: white;
-        font-size: 3.8rem;
+        font-size: 3.7rem;
         font-weight: bold;
     }
     .cubeBox {
-        width: 50vw;
+        width: 40vw;
         height: inherit;
     }
 
+    .selectBox {
+        width: 43vw;
+        margin-top: 2rem;
+        flex-wrap: wrap;
+
+        display: flex;
+    }
+`;
+
+export const StartBtn = styled.div<{ isVisible: boolean }>`
+    // 화면 맨 끝에 도착해야만 보이게
+    transition: opacity 0.7s ease-in-out;
+    opacity: ${(props) => (props.isVisible ? 1 : 0)};
+    transform: ${(props) =>
+        props.isVisible ? "translateY(0)" : "translateY(20px)"};
+    visibility: ${(props) => (props.isVisible ? "visible" : "hidden")};
+
     .startBtn {
-        position: absolute;
+        position: fixed;
         bottom: 10vh;
         right: 10vw;
 
@@ -75,6 +92,27 @@ export const Container = styled.div`
         display: flex;
         justify-content: flex-end;
         align-items: center;
+    }
+`;
+
+export const Select = styled.div`
+    margin-top: 1rem;
+    margin-right: 1rem;
+    padding: 0.5rem 1.3rem;
+    font-size: 1.2rem;
+    color: white;
+    border-radius: 1rem;
+    border: 1px solid white;
+
+    &:hover {
+        cursor: pointer;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-color: #ccc;
+    }
+
+    &:active {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-color: #ccc;
     }
 `;
 
