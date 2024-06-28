@@ -3,7 +3,7 @@ import { Theme } from "../styles/RoomTheme2Styled";
 
 const RoomTheme2 = () => {
     return (
-        <Theme>
+        <Theme data-aos="fade-up" data-aos-duration="1000">
             <div className="titleBox">
                 <p>방탈출 테마 이름</p>
             </div>
