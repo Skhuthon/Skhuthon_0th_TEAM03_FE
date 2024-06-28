@@ -4,6 +4,7 @@ import {
     Container,
     StartBtn,
     Select,
+    StyledLink,
 } from "../styles/ThemeRecsQuestionsStyled";
 import { IoIosArrowForward } from "react-icons/io";
 
@@ -118,14 +119,16 @@ const ThemeRecsQuestions = () => {
                 </div>
             </Container>
 
-            <StartBtn isVisible={isVisible}>
-                <div className="startBtn">
-                    <p className="start">추천 받기</p>
-                    <div className="icon">
-                        <IoIosArrowForward />
+            <StyledLink to={`/themeRecsResult`}>
+                <StartBtn isVisible={isVisible}>
+                    <div className="startBtn">
+                        <p className="start">추천 받기</p>
+                        <div className="icon">
+                            <IoIosArrowForward />
+                        </div>
                     </div>
-                </div>
-            </StartBtn>
+                </StartBtn>
+            </StyledLink>
         </>
     );
 };
