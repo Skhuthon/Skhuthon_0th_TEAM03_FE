@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "../styles/NavbarStyled";
+import { Container, NavLink } from "../styles/NavbarStyled";
 import logo from "../image/bangpro_logo.png";
 import { BsChatSquareHeartFill } from "react-icons/bs";
 import { BsCollectionFill } from "react-icons/bs";
@@ -11,25 +11,34 @@ const Navbar = () => {
             <div className="logoBox">
                 <img src={logo} alt="logo" className="logo"></img>
             </div>
+
             <div className="navBox">
-                <div className="nav1">
-                    <div>
-                        <BsChatSquareHeartFill />
+                <NavLink to={`/themeRecs`}>
+                    <div className="nav">
+                        <div>
+                            <BsChatSquareHeartFill />
+                        </div>
+                        <p>테마 추천</p>
                     </div>
-                    <p>테마 추천</p>
-                </div>
-                <div className="nav2">
-                    <div>
-                        <BsCollectionFill />
+                </NavLink>
+
+                <NavLink to={`/`}>
+                    <div className="nav">
+                        <div>
+                            <BsCollectionFill />
+                        </div>
+                        <p>테마 정보</p>
                     </div>
-                    <p>테마 정보</p>
-                </div>
-                <div className="nav3">
-                    <div>
-                        <BsPersonFill />
+                </NavLink>
+
+                <NavLink to={`/`}>
+                    <div className="nav">
+                        <div>
+                            <BsPersonFill />
+                        </div>
+                        <p>마이페이지</p>
                     </div>
-                    <p>마이페이지</p>
-                </div>
+                </NavLink>
             </div>
         </Container>
     );

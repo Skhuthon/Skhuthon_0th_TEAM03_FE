@@ -32,35 +32,35 @@ export const Container = styled.div`
         justify-content: space-between;
         align-items: center;
     }
+`;
 
-    .navBox > div {
+export const NavLink = styled(Link)`
+    text-decoration: none;
+
+    .nav {
         display: flex;
         justify-content: center;
         align-items: center;
+
+        transition: all 0.3s ease-in-out;
     }
 
-    .navBox > div > div {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
+    .nav > div {
         font-size: 1.4rem;
         margin-right: 0.7rem;
     }
 
-    .navBox > div:hover {
+    .nav:hover {
         cursor: pointer;
         color: white;
+        transform: scale(1.05);
     }
-`;
 
-export const StyledLink = styled(Link)`
-    text-decoration: none;
     &:focus,
-    &:hover,
     &:visited,
     &:link,
     &:active {
         text-decoration: none;
+        color: #3b3b3b;
     }
 `;
