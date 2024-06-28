@@ -63,9 +63,8 @@ export const StartBtn = styled.div<{ isVisible: boolean }>`
         justify-content: center;
         align-items: center;
 
-        width: 10rem;
         height: 2rem;
-        padding: 0.7rem 1rem;
+        padding: 0.7rem 2rem;
 
         border-radius: 1rem;
         border: 3px solid white;
