@@ -4,14 +4,16 @@ import {
     Container,
     StartBtn,
     Select,
-    StyledLink,
 } from "../styles/ThemeRecsQuestionsStyled";
 import { IoIosArrowForward } from "react-icons/io";
 import { regions } from "../props/Regions";
 import { genres } from "../props/Genres";
 import { difficulty } from "../props/Difficulty";
+import { useNavigate } from "react-router-dom";
 
 const ThemeRecsQuestions = () => {
+    let navigate = useNavigate();
+
     const [isVisible, setIsVisible] = useState(false);
     const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
     const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
@@ -46,6 +48,28 @@ const ThemeRecsQuestions = () => {
         console.log(
             selectedRegion + " " + selectedGenre + " " + selectedDifficulty
         );
+
+        const fetchData = async () => {
+            if (selectedDifficulty && selectedGenre && selectedRegion) {
+                // const response = await postThemeRecs(
+                //     selectedDifficulty,
+                //     selectedGenre,
+                //     selectedRegion
+                // );
+
+                navigate("/themeRecsResult", {
+                    state: {
+                        selectedDifficulty,
+                        selectedGenre,
+                        selectedRegion,
+                    },
+                });
+            } else {
+                alert("아직 선택되지 않은 문항이 있습니다.");
+            }
+        };
+
+        fetchData();
     };
 
     return (
@@ -118,16 +142,14 @@ const ThemeRecsQuestions = () => {
                 </div>
             </Container>
 
-            <StyledLink to={`/themeRecsResult`}>
-                <StartBtn isVisible={isVisible} onClick={() => submit()}>
-                    <div className="startBtn">
-                        <p className="start">추천 받기</p>
-                        <div className="icon">
-                            <IoIosArrowForward />
-                        </div>
+            <StartBtn isVisible={isVisible} onClick={() => submit()}>
+                <div className="startBtn">
+                    <p className="start">추천 받기</p>
+                    <div className="icon">
+                        <IoIosArrowForward />
                     </div>
-                </StartBtn>
-            </StyledLink>
+                </div>
+            </StartBtn>
         </>
     );
 };

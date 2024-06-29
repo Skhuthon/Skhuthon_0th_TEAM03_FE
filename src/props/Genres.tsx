@@ -9,7 +9,7 @@ export const genres = [
     },
     {
         id: 3,
-        name: "공포 / 스릴러",
+        name: "공포",
     },
     {
         id: 4,
