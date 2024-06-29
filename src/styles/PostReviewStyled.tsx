@@ -78,6 +78,12 @@ export const Container = styled.div`
         max-width: 40vw;
         max-height: 20vh;
     }
+
+    .totalThemeTime,
+    .remainingTime {
+        width: 2rem;
+        margin-right: 1rem;
+    }
 `;
 
 export const StartBtn = styled.div<{ isVisible: boolean }>`

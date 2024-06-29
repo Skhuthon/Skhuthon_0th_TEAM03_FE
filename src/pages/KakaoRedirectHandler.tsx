@@ -9,19 +9,24 @@ const KakaoRedirectHandler = () => {
     console.log(code);
     const login = async () => {
         try {
-            console.log('code', code);
-
+            console.log("로그인시작!!!!!!!!----------");
             const response = await axios.post(
                 "https://api.labyrinth30-edu.link/auth/kakao/redirect",
                 {
-                    code
+                    code,
                 }
             );
-            localStorage.setItem("accessToken", response.data.accessToken);
-            navigate("/mypage");
+            console.log("로그인해볼게요---------------");
             console.log(response);
+            localStorage.setItem("accessToken", response.data.accessToken);
+            localStorage.setItem("username", response.data.nickname);
+
+            console.log(response);
+
+            navigate("/mypage");
+            window.location.reload();
         } catch (error) {
-            console.log('123', error);
+            console.log(error);
         }
     };
 
@@ -30,8 +35,6 @@ const KakaoRedirectHandler = () => {
             login();
         }
     }, []);
-    return (
-        <div>로그인 중..</div>
-    );
+    return <div>로그인 중..</div>;
 };
 export default KakaoRedirectHandler;

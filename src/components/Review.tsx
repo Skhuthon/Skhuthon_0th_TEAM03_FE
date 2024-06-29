@@ -1,36 +1,42 @@
-import { Link } from "react-router-dom";
-import { Review } from "../styles/ReviewStyled";
+import { Review, StyledLink } from "../styles/ReviewStyled";
+import { ReviewProps } from "../props/ReviewProps";
 
-type ReviewProps = {
-    reviewId: string;
-    title: string;
-};
-
-const ReviewTheme = (reviewId: any) => {
+const ReviewTheme: React.FC<ReviewProps> = ({
+    id,
+    themeName,
+    isSuccess,
+    numberOfPeople,
+    numberOfHintsUsed,
+    remainingTime,
+    totalThemeTime,
+    content,
+}) => {
     return (
-        <Link to={`/reviews/${reviewId}`}>
+        <StyledLink to={`/reviews/${id}`}>
             <Review>
                 <>
                     <div className="titleBox">
-                        <p>제목</p>
-                    </div>
-                    <div className="addressBox">
-                        <p>매장</p>
+                        <p>{themeName}</p>
                     </div>
                     <div className="contentBox">
-                        <p>리뷰</p>
+                        <p>
+                            {content.length > 35
+                                ? content.slice(0, 35) + "..."
+                                : content}
+                        </p>
                     </div>
                     <div className="cardFooter">
                         <div className="hashtagBox">
-                            <p>#탈출 성공</p>
-                            <p>#4명</p>
-                            <p>#힌트 3번</p>
-                            <p>#남은 시간 10분</p>
+                            <p>#{isSuccess ? "성공" : "실패"}</p>
+                            <p>#{numberOfPeople}명과 함께</p>
+                            <p>#{numberOfHintsUsed}개의 힌트</p>
+                            <p>#테마 시간 {totalThemeTime}분</p>
+                            <p>#남은 시간 {remainingTime}초</p>
                         </div>
                     </div>
                 </>
             </Review>
-        </Link>
+        </StyledLink>
     );
 };
 

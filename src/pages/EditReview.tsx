@@ -2,24 +2,26 @@ import React, { useEffect, useState, KeyboardEvent, ChangeEvent } from "react";
 import { Container, StartBtn } from "../styles/PostReviewStyled";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-interface reviewInfo {
-    themeName: String;
-    isSuccess: Boolean;
-    numberOfPeople: Number;
-    numberOfHintsUsed: Number;
-    remainingTime_min: Number;
-    remainingTime_sec: Number;
-    totalThemeTime: Number;
-    content: String;
-}
+// interface reviewInfo {
+//     themeName: String;
+//     isSuccess: Boolean;
+//     numberOfPeople: Number;
+//     numberOfHintsUsed: Number;
+//     remainingTime_min: Number;
+//     remainingTime_sec: Number;
+//     totalThemeTime: Number;
+//     content: String;
+// }
 
-const PostReview = () => {
+const EditReview = () => {
     const navigate = useNavigate();
     const onChange = (e: any) => {
         console.log(e.target.value);
         setFormData(e.target.value);
     };
+    const { reviewId } = useParams<{ reviewId: string }>();
 
     const [formData, setFormData] = useState({
         themeName: "",
@@ -87,12 +89,15 @@ const PostReview = () => {
         const token = localStorage.getItem("accessToken");
         if (token) {
             axios
-                .post("https://api.labyrinth30-edu.link/reviews", data, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                        "Content-Type": "application/json",
-                    },
-                })
+                .patch(
+                    `https://api.labyrinth30-edu.link/reviews/${reviewId}`,
+                    data,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                )
                 .then((response) => {
                     console.log("Response:", response.data);
                     navigate(`/mypage`);
@@ -104,6 +109,46 @@ const PostReview = () => {
             console.error("No access token found");
         }
     };
+
+    useEffect(() => {
+        const fetchPostData = async () => {
+            const token = localStorage.getItem("accessToken");
+
+            try {
+                const response = await axios.get(
+                    `https://api.labyrinth30-edu.link/reviews/${reviewId}`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+                console.log(response);
+                const postData = response.data;
+
+                const remainingTime_min = Math.floor(
+                    postData.remainingTime / 60
+                );
+                const remainingTime_sec = postData.remainingTime % 60;
+
+                setFormData({
+                    themeName: postData.themeName,
+                    isSuccess: postData.isSuccess,
+                    numberOfPeople: postData.numberOfPeople,
+                    numberOfHintsUsed: postData.numberOfHintsUsed,
+                    remainingTime_min: remainingTime_min,
+                    remainingTime_sec: remainingTime_sec,
+                    remainingTime: postData.remainingTime,
+                    totalThemeTime: postData.totalThemeTime,
+                    content: postData.content,
+                });
+            } catch (error) {
+                console.error("Error fetching post data:", error);
+            }
+        };
+
+        fetchPostData();
+    }, [reviewId]);
 
     return (
         <Container>
@@ -120,6 +165,7 @@ const PostReview = () => {
                     <p className="postTitle">테마 이름</p>
                     <input
                         name="themeName"
+                        value={formData.themeName}
                         placeholder="방탈출 지점과 테마 이름"
                         onChange={onInputHandler}
                         className="postThemeTitle"
@@ -141,6 +187,7 @@ const PostReview = () => {
                     <input
                         type="number"
                         name="numberOfPeople"
+                        value={formData.numberOfPeople}
                         placeholder="플레이 인원"
                         onChange={onInputHandler}
                         className="postTagsBox"
@@ -151,6 +198,7 @@ const PostReview = () => {
                     <input
                         type="number"
                         name="numberOfHintsUsed"
+                        value={formData.numberOfHintsUsed}
                         placeholder="힌트 사용 개수"
                         onChange={onInputHandler}
                         className="postTagsBox"
@@ -161,6 +209,7 @@ const PostReview = () => {
                     <p className="postTitle">테마 시간</p>
                     <input
                         name="totalThemeTime"
+                        value={formData.totalThemeTime}
                         type="number"
                         placeholder="분"
                         onChange={onInputHandler}
@@ -171,6 +220,7 @@ const PostReview = () => {
                     <p className="postTitle">남은 시간</p>
                     <input
                         name="remainingTime_min"
+                        value={formData.remainingTime_min}
                         type="number"
                         placeholder="분"
                         onChange={onInputHandler}
@@ -178,6 +228,7 @@ const PostReview = () => {
                     ></input>
                     <input
                         name="remainingTime_sec"
+                        value={formData.remainingTime_sec}
                         type="number"
                         placeholder="초"
                         onChange={onInputHandler}
@@ -189,6 +240,7 @@ const PostReview = () => {
                     <p className="postTitle">한 줄 리뷰</p>
                     <textarea
                         name="content"
+                        value={formData.content}
                         placeholder="내용을 입력해주세요"
                         onChange={onInputHandler}
                         maxLength={2000}
@@ -199,4 +251,4 @@ const PostReview = () => {
         </Container>
     );
 };
-export default PostReview;
+export default EditReview;
