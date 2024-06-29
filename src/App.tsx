@@ -12,6 +12,7 @@ import UserPage from "./pages/UserPage";
 import LoginPage from "./pages/LoginPage";
 import ReviewWriting from "./pages/ReviewWriting";
 import ReviewList from "./pages/ReviewList";
+import MyPage from "./pages/MyPage";
 
 const App: React.FC = () => {
     useEffect(() => {
@@ -35,6 +36,7 @@ const App: React.FC = () => {
                 <Route path="/reviewList" element={<ReviewList />} />
                 <Route path="/reviewWriting" element={<ReviewWriting />} />
                 <Route path="/themeList" element={<ThemeList />} />
+                <Route path="/mypage" element={<MyPage />} />
             </Routes>
         </Router>
     );
