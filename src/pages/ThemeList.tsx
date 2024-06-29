@@ -5,14 +5,13 @@ import RoomTheme2 from "../components/RoomTheme2";
 import Pagination from "../components/BasicPagination";
 import { getThemeList } from "../api/ThemeListApi";
 import { ThemeProps } from "../props/ThemeProps";
+import { regions } from "../props/Regions";
 
 const ThemeList = () => {
-    const navigate = useNavigate();
     const [inputKeyword, setInputKeyword] = useState("");
-    const [searchKeyword, setSearchKeyword] = useState("");
+    const [inputRegion, setInputRegion] = useState("");
     const [take, setTake] = useState<number>(1); // 총 페이지 수
     const [page, setPage] = useState<number>(1); // 현재 페이지
-
     const [themeList, setThemeList] = useState<ThemeProps[]>([]);
 
     const handleInputKeyword = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,15 +22,19 @@ const ThemeList = () => {
         // 엔터 키가 눌렸는지 확인
         if (event.key === "Enter") {
             // 엔터 키가 눌렸을 때 실행할 동작
-            navigate(`/postBoard?keyword=${inputKeyword}`);
+            // console.log(inputKeyword);
+
+            const fetchData = async () => {
+                const themes = await getThemeList(1, inputKeyword, "");
+                setThemeList(themes.data);
+                setPage(1);
+                setTake(themes.totalPages);
+            };
+
+            fetchData();
 
             event.preventDefault(); // 폼 자동 제출 방지
         }
-    };
-
-    const submit = () => {
-        console.log("Submitted:", inputKeyword);
-        // 여기에 제출 로직 추가
     };
 
     const handleChangePage = (
@@ -41,16 +44,33 @@ const ThemeList = () => {
         setPage(value); // 페이지 변경 시 현재 페이지 상태 업데이트
     };
 
-    useEffect(() => {
+    // 지역 검색
+    const handleRegionClick = (name: string) => {
+        setInputRegion(name);
+        console.log(name);
+
         const fetchData = async () => {
-            const themes = await getThemeList(page, "", "");
+            const themes = await getThemeList(1, inputKeyword, inputRegion);
             setThemeList(themes.data);
+            setPage(1);
             setTake(themes.totalPages);
-            console.log(themes);
         };
 
         fetchData();
-    }, [page]);
+    };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const themes = await getThemeList(page, inputKeyword, inputRegion);
+            setThemeList(themes.data);
+            setTake(themes.totalPages);
+            // console.log(themes);
+        };
+
+        console.log(inputRegion);
+
+        fetchData();
+    }, [page, inputKeyword, inputRegion]);
 
     return (
         <Container>
@@ -69,16 +89,14 @@ const ThemeList = () => {
                 </div>
             </div>
             <div className="categoryBox">
-                <div className="category">서울 전체</div>
-                <div className="category">홍대</div>
-                <div className="category">강남</div>
-                <div className="category">건대</div>
-                <div className="category">대학로</div>
-                <div className="category">신촌</div>
-                <div className="category">잠실</div>
-                <div className="category">신림</div>
-                <div className="category">노원</div>
-                <div className="category">서울 (기타)</div>
+                {regions.map((region) => (
+                    <div
+                        className="category"
+                        onClick={() => handleRegionClick(region.name)}
+                    >
+                        {region.name}
+                    </div>
+                ))}
             </div>
 
             <div className="themeBox">
