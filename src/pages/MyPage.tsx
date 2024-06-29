@@ -62,18 +62,22 @@ const MyPage = () => {
             </div>
 
             <div className="reviewBox">
-                {reviewList?.map((review) => (
-                    <Review
-                        id={review.id}
-                        themeName={review.themeName}
-                        isSuccess={review.isSuccess}
-                        numberOfPeople={review.numberOfPeople}
-                        numberOfHintsUsed={review.numberOfHintsUsed}
-                        remainingTime={review.remainingTime}
-                        totalThemeTime={review.totalThemeTime}
-                        content={review.content}
-                    />
-                ))}
+                {reviewList.length > 0 ? (
+                    reviewList.map((review) => (
+                        <Review
+                            id={review.id}
+                            themeName={review.themeName}
+                            isSuccess={review.isSuccess}
+                            numberOfPeople={review.numberOfPeople}
+                            numberOfHintsUsed={review.numberOfHintsUsed}
+                            remainingTime={review.remainingTime}
+                            totalThemeTime={review.totalThemeTime}
+                            content={review.content}
+                        />
+                    ))
+                ) : (
+                    <p className="notFound">작성된 리뷰가 없습니다. 🥲</p>
+                )}
             </div>
 
             <div className="paginationBox">

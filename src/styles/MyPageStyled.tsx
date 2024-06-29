@@ -41,6 +41,10 @@ export const Container = styled.div`
     .paginationBox {
         margin-top: 7vh;
     }
+
+    .notFound {
+        color: white;
+    }
 `;
 
 export const StartBtn = styled.div<{ isVisible: boolean }>`

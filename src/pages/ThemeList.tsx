@@ -103,14 +103,18 @@ const ThemeList = () => {
             </div>
 
             <div className="themeBox">
-                {themeList?.map((theme) => (
-                    <RoomTheme2
-                        title={theme.title}
-                        difficulty={theme.difficulty}
-                        genre={theme.genre}
-                        store={theme.store}
-                    />
-                ))}
+                {themeList.length > 0 ? (
+                    themeList.map((theme) => (
+                        <RoomTheme2
+                            title={theme.title}
+                            difficulty={theme.difficulty}
+                            genre={theme.genre}
+                            store={theme.store}
+                        />
+                    ))
+                ) : (
+                    <p className="notFound">검색 결과가 없습니다. 🥲</p>
+                )}
             </div>
 
             <div className="paginationBox">

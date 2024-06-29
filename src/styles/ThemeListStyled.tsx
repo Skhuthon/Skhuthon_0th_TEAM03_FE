@@ -68,6 +68,10 @@ export const Container = styled.div`
     .paginationBox {
         margin-top: 7vh;
     }
+
+    .notFound {
+        color: white;
+    }
 `;
 
 export const Select = styled.div<{ isSelected: boolean }>`
