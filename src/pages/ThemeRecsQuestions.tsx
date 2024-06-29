@@ -5,6 +5,7 @@ import {
     StartBtn,
     Select,
 } from "../styles/ThemeRecsQuestionsStyled";
+import { StyledModal, customStyles } from "../styles/StyledModal";
 import { IoIosArrowForward } from "react-icons/io";
 import { regions } from "../props/Regions";
 import { genres } from "../props/Genres";
@@ -20,6 +21,7 @@ const ThemeRecsQuestions = () => {
     const [selectedDifficulty, setSelectedDifficulty] = useState<string | null>(
         null
     );
+    const [isModal, setIsModal] = useState<boolean>(false);
 
     const handleScroll = () => {
         const bottom =
@@ -65,7 +67,7 @@ const ThemeRecsQuestions = () => {
                     },
                 });
             } else {
-                alert("아직 선택되지 않은 문항이 있습니다.");
+                setIsModal(true);
             }
         };
 
@@ -150,6 +152,27 @@ const ThemeRecsQuestions = () => {
                     </div>
                 </div>
             </StartBtn>
+
+            {isModal ? (
+                <StyledModal
+                    isOpen={true}
+                    shouldFocusAfterRender={false}
+                    onRequestClose={() => setIsModal(false)}
+                    style={customStyles}
+                >
+                    <div className="error">
+                        아직 선택되지 않은 문항이 있습니다.
+                    </div>
+                    <div
+                        className="okBtn"
+                        onClick={(event: React.MouseEvent<HTMLDivElement>) =>
+                            setIsModal(false)
+                        }
+                    >
+                        확인
+                    </div>
+                </StyledModal>
+            ) : null}
         </>
     );
 };
