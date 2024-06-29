@@ -14,11 +14,11 @@ const KakaoRedirectHandler = () => {
             const response = await axios.post(
                 "https://api.labyrinth30-edu.link/auth/kakao/redirect",
                 {
-                    params: { code },
+                    code
                 }
             );
             localStorage.setItem("accessToken", response.data.accessToken);
-            navigate("/themeRecs");
+            navigate("/mypage");
             console.log(response);
         } catch (error) {
             console.log('123', error);

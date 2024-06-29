@@ -41,7 +41,7 @@ const App: React.FC = () => {
                 <Route path="/themeList" element={<ThemeList />} />
                 <Route path="/mypage" element={<MyPage />} />
                 <Route path="/postReview" element={<PostReview />} />
-                <Route path="/readReview" element={<ReadReview />} />
+                <Route path="/reviews/:reviewId" element={<ReadReview />} />
             </Routes>
         </Router>
     );

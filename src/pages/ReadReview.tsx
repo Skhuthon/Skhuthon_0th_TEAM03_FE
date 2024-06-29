@@ -1,24 +1,52 @@
 import React, { useEffect, useState, KeyboardEvent, ChangeEvent } from "react";
 import { Container, StartBtn } from "../styles/ReadReviewStyled";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 
 const PostReview = () => {
-    const onInputHandler = (
-        e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-    ) => {
-        // const value = e.target.value.trim(); // 입력값 앞뒤 공백 제거
-        // if (e.target.name === "title") {
-        //     setTitle(value);
-        // } else if (e.target.name === "content") {
-        //     setContent(value);
-        //     setInputCount(value.length);
-        // } else if (e.target.name === "tags") {
-        //     const tagArray = value
-        //         .split("#")
-        //         .map((tag) => tag.trim())
-        //         .filter((tag) => tag !== "");
-        //     setTags(tagArray);
-        // }
-    };
+    const [accessToken, setAccessToken] = useState<string | null>(null);
+    const { reviewId } = useParams<{ reviewId: string }>();
+    const [review, setReview] = useState<any>(null);
+    const navigate = useNavigate();
+    const [formData, setFormData] = useState({
+        themeName: "",
+        isSuccess: true,
+        numberOfPeople: 0,
+        numberOfHintsUsed: 0,
+        remainingTime: 0,
+        totalThemeTime: 0,
+        content: "",
+    });
+    
+    useEffect(() => {
+        const token = localStorage.getItem('accessToken');
+        if (token) {
+            setAccessToken(token);
+        }
+    }, []);
+
+
+    useEffect(() => {
+        const fetchReview = async () => {
+        const token = localStorage.getItem('accessToken');
+            try {
+                const response = await axios.get(`https://api.labyrinth30-edu.link/reviews/${reviewId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+            });
+                setReview(response.data);
+            } catch (error) {
+                console.error("Error fetching review:", error);
+            }
+        };
+
+        fetchReview();
+    }, [reviewId]);
+
+    if (!review) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <Container>
@@ -39,27 +67,27 @@ const PostReview = () => {
 
                 <div className="posting">
                     <p className="postTitle">테마 이름</p>
-                    <p className="read">테마 이름</p>
+                    <p className="read">{review.themeName}</p>
                 </div>
                 <div className="posting">
                     <p className="postTitle">성공 여부</p>
-                    <p className="read">성공</p>
+                    <p className="read">{review.isSuccess}</p>
                 </div>
                 <div className="posting">
                     <p className="postTitle">인원 수</p>
-                    <p className="read">0 명</p>
+                    <p className="read">{review.numberOfPeople} 명</p>
                 </div>
                 <div className="posting">
                     <p className="postTitle">힌트 사용</p>
-                    <p className="read">4 개</p>
+                    <p className="read">{review.numberOfHintsUsed} 개</p>
                 </div>
                 <div className="posting">
                     <p className="postTitle">남은 시간</p>
-                    <p className="read">1 분</p>
+                    <p className="read">{review.remainingTime} 분</p>
                 </div>
                 <div className="posting">
                     <p className="postTitle">한 줄 리뷰</p>
-                    <p className="read">재미있어요.</p>
+                    <p className="read">{review.content}</p>
                 </div>
             </div>
         </Container>

@@ -31,7 +31,7 @@ const Navbar = () => {
                     </div>
                 </NavLink>
 
-                <NavLink to={`/userPage`}>
+                <NavLink to={`/mypage`}>
                     <div className="nav">
                         <div>
                             <BsPersonFill />

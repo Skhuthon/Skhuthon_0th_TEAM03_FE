@@ -2,10 +2,39 @@ import React, { useEffect, useState, KeyboardEvent, ChangeEvent } from "react";
 import Review from "../components/Review";
 import { Container, StartBtn } from "../styles/MyPageStyled";
 import Pagination from "../components/BasicPagination";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const MyPage = () => {
     const [take, setTake] = useState<number>(1); // 총 페이지 수
     const [page, setPage] = useState<number>(1); // 현재 페이지
+    const [reviews, setReviews] = useState(null);
+    const [accessToken, setAccessToken] = useState<string | null>(null);
+
+    useEffect(() => {
+        const token = localStorage.getItem('accessToken');
+        if (token) {
+            setAccessToken(token);
+        }
+        console.log(token);
+    }, []);
+
+    useEffect(() => {
+        const reviewList = async () => {
+            const token = localStorage.getItem('accessToken');
+            try {
+                const response = await axios.get("https://api.labyrinth30-edu.link/reviews",
+                    {
+                        headers: {'Authorization': `Bearer ${token}`}
+                    }
+                );
+                setReviews(response.data);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        reviewList();
+    }, []);
 
     const handleChangePage = (
         event: React.ChangeEvent<unknown>,
@@ -23,9 +52,9 @@ const MyPage = () => {
                 </div>
 
                 <StartBtn isVisible={true}>
-                    <div className="startBtn">
+                    <Link to={'/postReview'} className="startBtn">
                         <p className="start">리뷰 작성</p>
-                    </div>
+                    </Link>
                 </StartBtn>
             </div>
 
@@ -34,6 +63,7 @@ const MyPage = () => {
                 <Review />
                 <Review />
                 <Review />
+                
             </div>
 
             <div className="paginationBox">
