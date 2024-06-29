@@ -22,7 +22,7 @@ const Navbar = () => {
                     </div>
                 </NavLink>
 
-                <NavLink to={`/`}>
+                <NavLink to={`/themeList`}>
                     <div className="nav">
                         <div>
                             <BsCollectionFill />

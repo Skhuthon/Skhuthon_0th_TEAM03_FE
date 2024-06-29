@@ -1,13 +1,9 @@
 import React from "react";
-import { Theme } from "../styles/RoomThemeStyled";
+import { Theme } from "../styles/RoomTheme2Styled";
 
-const RoomTheme = () => {
+const RoomTheme2 = () => {
     return (
-        <Theme
-            data-aos="flip-right"
-            data-aos-duration="3000"
-            data-aos-easing="ease-out-cubic"
-        >
+        <Theme data-aos="fade-up" data-aos-duration="1000">
             <div className="titleBox">
                 <p>방탈출 테마 이름</p>
             </div>
@@ -20,11 +16,11 @@ const RoomTheme = () => {
                     <p>#장르</p>
                 </div>
                 <div className="linkBtn">
-                    <p>예약 사이트</p>
+                    <p>예약</p>
                 </div>
             </div>
         </Theme>
     );
 };
 
-export default RoomTheme;
+export default RoomTheme2;

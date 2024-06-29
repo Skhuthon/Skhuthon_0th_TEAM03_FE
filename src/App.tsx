@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import MainPage from "./pages/MainPage";
 import ThemeRecs from "./pages/ThemeRecs";
 import ThemeRecsQuestions from "./pages/ThemeRecsQuestions";
 import ThemeRecsResult from "./pages/ThemeRecsResult";
+import ThemeList from "./pages/ThemeList";
 import Navbar from "./components/Navbar";
 import UserPage from "./pages/UserPage";
 import LoginPage from "./pages/LoginPage";
@@ -11,6 +14,10 @@ import ReviewWriting from "./pages/ReviewWriting";
 import ReviewList from "./pages/ReviewList";
 
 const App: React.FC = () => {
+    useEffect(() => {
+        AOS.init(); // AOS 초기화
+    }, []);
+
     return (
         <Router>
             <Navbar />
@@ -27,6 +34,7 @@ const App: React.FC = () => {
                 <Route path="/auth/kakao/redirect" element={<UserPage />} />
                 <Route path="/reviewList" element={<ReviewList />} />
                 <Route path="/reviewWriting" element={<ReviewWriting />} />
+                <Route path="/themeList" element={<ThemeList />} />
             </Routes>
         </Router>
     );
