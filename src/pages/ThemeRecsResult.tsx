@@ -36,17 +36,18 @@ const ThemeRecsResult = () => {
             </div>
 
             <div className="resultBox">
-                {/* <RoomTheme />
-                <RoomTheme />
-                <RoomTheme /> */}
-                {themeList?.map((theme) => (
-                    <RoomTheme
-                        title={theme.title}
-                        difficulty={theme.difficulty}
-                        genre={theme.genre}
-                        store={theme.store}
-                    />
-                ))}
+                {themeList.length > 0 ? (
+                    themeList.map((theme) => (
+                        <RoomTheme
+                            title={theme.title}
+                            difficulty={theme.difficulty}
+                            genre={theme.genre}
+                            store={theme.store}
+                        />
+                    ))
+                ) : (
+                    <p className="notFound">조건에 맞는 테마가 없습니다. 🥲</p>
+                )}
             </div>
 
             <StartBtn isVisible={true}>
