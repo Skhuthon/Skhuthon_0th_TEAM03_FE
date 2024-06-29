@@ -3,6 +3,7 @@ import KakaoLogin from "./KakaoLogin"; // Kakao 로그인 버튼 컴포넌트
 import { Container } from "../styles/LoginPageStyled";
 
 const LoginPage: React.FC = () => {
+
   useEffect(() => {
     const initializeKakao = () => {
       console.log("Kakao SDK 초기화 시도"); // 로그 추가

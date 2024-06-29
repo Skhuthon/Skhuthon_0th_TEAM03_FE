@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import loginBtn from '../image/kakao_login_img.png'
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const KakaoLogin: React.FC = () => {
+
     const loginWithKakao = () => {
+
         if (window.Kakao && window.Kakao.Auth) {
           window.Kakao.Auth.authorize({
             redirectUri: "http://localhost:3000/auth/kakao/redirect", // 설정한 리디렉션 URI 입력
@@ -23,3 +27,4 @@ const KakaoLogin: React.FC = () => {
 };
 
 export default KakaoLogin;
+

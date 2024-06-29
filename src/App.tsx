@@ -12,6 +12,7 @@ import UserPage from "./pages/UserPage";
 import LoginPage from "./pages/LoginPage";
 import ReviewWriting from "./pages/ReviewWriting";
 import ReviewList from "./pages/ReviewList";
+import KakaoRedirectHandler from "./pages/KakaoRedirectHandler";
 
 const App: React.FC = () => {
     useEffect(() => {
@@ -31,7 +32,7 @@ const App: React.FC = () => {
                 <Route path="/themeRecsResult" element={<ThemeRecsResult />} />
                 <Route path="/userPage" element={<UserPage />} />
                 <Route path="/loginPage" element={<LoginPage />} />
-                <Route path="/auth/kakao/redirect" element={<UserPage />} />
+                <Route path="/auth/kakao/redirect" element={<KakaoRedirectHandler />} />
                 <Route path="/reviewList" element={<ReviewList />} />
                 <Route path="/reviewWriting" element={<ReviewWriting />} />
                 <Route path="/themeList" element={<ThemeList />} />
