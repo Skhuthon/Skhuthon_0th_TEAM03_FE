@@ -1,9 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container, StartBtn } from "../styles/ThemeRecsResultStyled";
 import { IoIosArrowForward } from "react-icons/io";
 import RoomTheme from "../components/RoomTheme";
+import { useLocation } from "react-router-dom";
+import { postThemeRecs } from "../api/ThemeRecsApi";
+import { ThemeProps } from "../props/ThemeProps";
 
 const ThemeRecsResult = () => {
+    const location = useLocation();
+    const { selectedDifficulty, selectedGenre, selectedRegion } =
+        location.state || {};
+    const [themeList, setThemeList] = useState<ThemeProps[]>([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await postThemeRecs(
+                selectedDifficulty,
+                selectedGenre,
+                selectedRegion
+            );
+
+            setThemeList(response);
+
+            console.log(response);
+        };
+
+        fetchData();
+    }, []);
+
     return (
         <Container>
             <div className="textBox">
@@ -12,9 +36,17 @@ const ThemeRecsResult = () => {
             </div>
 
             <div className="resultBox">
+                {/* <RoomTheme />
                 <RoomTheme />
-                <RoomTheme />
-                <RoomTheme />
+                <RoomTheme /> */}
+                {themeList?.map((theme) => (
+                    <RoomTheme
+                        title={theme.title}
+                        difficulty={theme.difficulty}
+                        genre={theme.genre}
+                        store={theme.store}
+                    />
+                ))}
             </div>
 
             <StartBtn isVisible={true}>

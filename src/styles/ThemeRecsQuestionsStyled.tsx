@@ -94,7 +94,7 @@ export const StartBtn = styled.div<{ isVisible: boolean }>`
     }
 `;
 
-export const Select = styled.div`
+export const Select = styled.div<{ isSelected: boolean }>`
     margin-top: 1rem;
     margin-right: 1rem;
     padding: 0.5rem 1.3rem;
@@ -102,6 +102,10 @@ export const Select = styled.div`
     color: white;
     border-radius: 1rem;
     border: 1px solid white;
+
+    background-color: ${(props) => (props.isSelected ? "#03ff8e18" : null)};
+    color: ${(props) => (props.isSelected ? "#03ff8e" : "#fff")};
+    border-color: ${(props) => (props.isSelected ? "#03FF8D" : "#fff")};
 
     &:hover {
         cursor: pointer;
