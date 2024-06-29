@@ -81,9 +81,27 @@ const ThemeRecsQuestions = () => {
         <>
             <Container>
                 <div className="textBox">
-                    <div className="subTitle">당신을 위한 방,</div>
-                    <div className="title">어느 지역을 원하시나요?</div>
-                    <div className="selectBox">
+                    <div
+                        className="subTitle"
+                        data-aos="fade-up"
+                        data-aos-duration="2000"
+                    >
+                        당신을 위한 방,
+                    </div>
+                    <div
+                        className="title"
+                        data-aos="fade-up"
+                        data-aos-delay="1000"
+                        data-aos-duration="2000"
+                    >
+                        어느 지역을 원하시나요?
+                    </div>
+                    <div
+                        className="selectBox"
+                        data-aos="fade-up"
+                        data-aos-delay="2000"
+                        data-aos-duration="2000"
+                    >
                         {regions.map((region) => (
                             <Select
                                 key={region.id}
@@ -106,9 +124,27 @@ const ThemeRecsQuestions = () => {
                     <Obj3d2 />
                 </div>
                 <div className="textBox">
-                    <div className="subTitle">당신을 위한 방,</div>
-                    <div className="title">어떤 장르를 원하시나요?</div>
-                    <div className="selectBox">
+                    <div
+                        className="subTitle"
+                        data-aos="fade-up"
+                        data-aos-duration="2000"
+                    >
+                        당신을 위한 방,
+                    </div>
+                    <div
+                        className="title"
+                        data-aos="fade-up"
+                        data-aos-delay="1000"
+                        data-aos-duration="2000"
+                    >
+                        어떤 장르를 원하시나요?
+                    </div>
+                    <div
+                        className="selectBox"
+                        data-aos="fade-up"
+                        data-aos-delay="2000"
+                        data-aos-duration="2000"
+                    >
                         {genres.map((genre) => (
                             <Select
                                 key={genre.id}
@@ -125,9 +161,27 @@ const ThemeRecsQuestions = () => {
             </Container>
             <Container>
                 <div className="textBox">
-                    <div className="subTitle">당신을 위한 방,</div>
-                    <div className="title">어떤 난이도를 원하시나요?</div>
-                    <div className="selectBox">
+                    <div
+                        className="subTitle"
+                        data-aos="fade-up"
+                        data-aos-duration="2000"
+                    >
+                        당신을 위한 방,
+                    </div>
+                    <div
+                        className="title"
+                        data-aos="fade-up"
+                        data-aos-delay="1000"
+                        data-aos-duration="2000"
+                    >
+                        어떤 난이도를 원하시나요?
+                    </div>
+                    <div
+                        className="selectBox"
+                        data-aos="fade-up"
+                        data-aos-delay="2000"
+                        data-aos-duration="2000"
+                    >
                         {difficulty.map((d) => (
                             <Select
                                 key={d.id}
