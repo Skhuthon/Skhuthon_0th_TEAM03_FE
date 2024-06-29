@@ -1,15 +1,30 @@
 import React, { useEffect, useState } from "react";
 import Cube from "./Cube";
+import Obj3d from "../components/Obj3d";
+import Obj3d2 from "../components/Obj3d2";
+import Obj3d3 from "../components/Obj3d3";
 import {
     Container,
     StartBtn,
     Select,
-    StyledLink,
 } from "../styles/ThemeRecsQuestionsStyled";
+import { StyledModal, customStyles } from "../styles/StyledModal";
 import { IoIosArrowForward } from "react-icons/io";
+import { regions } from "../props/Regions";
+import { genres } from "../props/Genres";
+import { difficulty } from "../props/Difficulty";
+import { useNavigate } from "react-router-dom";
 
 const ThemeRecsQuestions = () => {
+    let navigate = useNavigate();
+
     const [isVisible, setIsVisible] = useState(false);
+    const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
+    const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
+    const [selectedDifficulty, setSelectedDifficulty] = useState<string | null>(
+        null
+    );
+    const [isModal, setIsModal] = useState<boolean>(false);
 
     const handleScroll = () => {
         const bottom =
@@ -25,110 +40,196 @@ const ThemeRecsQuestions = () => {
         };
     }, []);
 
+    // 사용자 선택 핸들러
+    const handleSelect = (type: string, value: string) => {
+        if (type === "region") setSelectedRegion(value);
+        if (type === "genre") setSelectedGenre(value);
+        if (type === "difficulty") setSelectedDifficulty(value);
+        console.log(value);
+    };
+
+    // 제출
+    const submit = () => {
+        console.log(
+            selectedRegion + " " + selectedGenre + " " + selectedDifficulty
+        );
+
+        const fetchData = async () => {
+            if (selectedDifficulty && selectedGenre && selectedRegion) {
+                // const response = await postThemeRecs(
+                //     selectedDifficulty,
+                //     selectedGenre,
+                //     selectedRegion
+                // );
+
+                navigate("/themeRecsResult", {
+                    state: {
+                        selectedDifficulty,
+                        selectedGenre,
+                        selectedRegion,
+                    },
+                });
+            } else {
+                setIsModal(true);
+            }
+        };
+
+        fetchData();
+    };
+
     return (
         <>
             <Container>
                 <div className="textBox">
-                    <div className="subTitle">당신을 위한 방,</div>
-                    <div className="title">어느 지역을 원하시나요?</div>
-                    <div className="selectBox">
-                        <Select>
-                            <p>서울 전체</p>
-                        </Select>
-                        <Select>
-                            <p>홍대</p>
-                        </Select>
-                        <Select>
-                            <p>강남</p>
-                        </Select>
-                        <Select>
-                            <p>건대</p>
-                        </Select>
-                        <Select>
-                            <p>대학로</p>
-                        </Select>
-                        <Select>
-                            <p>신촌</p>
-                        </Select>
-                        <Select>
-                            <p>잠실</p>
-                        </Select>
-                        <Select>
-                            <p>신림</p>
-                        </Select>
-                        <Select>
-                            <p>노원</p>
-                        </Select>
-                        <Select>
-                            <p>서울 (기타)</p>
-                        </Select>
+                    <div
+                        className="subTitle"
+                        data-aos="fade-up"
+                        data-aos-duration="2000"
+                    >
+                        당신을 위한 방,
+                    </div>
+                    <div
+                        className="title"
+                        data-aos="fade-up"
+                        data-aos-delay="1000"
+                        data-aos-duration="2000"
+                    >
+                        어느 지역을 원하시나요?
+                    </div>
+                    <div
+                        className="selectBox"
+                        data-aos="fade-up"
+                        data-aos-delay="2000"
+                        data-aos-duration="2000"
+                    >
+                        {regions.map((region) => (
+                            <Select
+                                key={region.id}
+                                onClick={() =>
+                                    handleSelect("region", region.name)
+                                }
+                                isSelected={selectedRegion === region.name}
+                            >
+                                <p>{region.name}</p>
+                            </Select>
+                        ))}
                     </div>
                 </div>
                 <div className="cubeBox">
-                    <Cube />
+                    <Obj3d3 />
                 </div>
             </Container>
             <Container>
                 <div className="cubeBox">
-                    <Cube />
+                    <Obj3d2 />
                 </div>
                 <div className="textBox">
-                    <div className="subTitle">당신을 위한 방,</div>
-                    <div className="title">어떤 장르를 원하시나요?</div>
-                    <div className="selectBox">
-                        <Select>
-                            <p>랜덤</p>
-                        </Select>
-                        <Select>
-                            <p>감성</p>
-                        </Select>
-                        <Select>
-                            <p>공포 / 스릴러</p>
-                        </Select>
-                        <Select>
-                            <p>코믹</p>
-                        </Select>
-                        <Select>
-                            <p>추리</p>
-                        </Select>
-                        <Select>
-                            <p>모험</p>
-                        </Select>
+                    <div
+                        className="subTitle"
+                        data-aos="fade-up"
+                        data-aos-duration="2000"
+                    >
+                        당신을 위한 방,
+                    </div>
+                    <div
+                        className="title"
+                        data-aos="fade-up"
+                        data-aos-delay="1000"
+                        data-aos-duration="2000"
+                    >
+                        어떤 장르를 원하시나요?
+                    </div>
+                    <div
+                        className="selectBox"
+                        data-aos="fade-up"
+                        data-aos-delay="2000"
+                        data-aos-duration="2000"
+                    >
+                        {genres.map((genre) => (
+                            <Select
+                                key={genre.id}
+                                onClick={() =>
+                                    handleSelect("genre", genre.name)
+                                }
+                                isSelected={selectedGenre === genre.name}
+                            >
+                                <p>{genre.name}</p>
+                            </Select>
+                        ))}
                     </div>
                 </div>
             </Container>
             <Container>
                 <div className="textBox">
-                    <div className="subTitle">당신을 위한 방,</div>
-                    <div className="title">어떤 난이도를 원하시나요?</div>
-                    <div className="selectBox">
-                        <Select>
-                            <p>어려움</p>
-                        </Select>
-                        <Select>
-                            <p>보통</p>
-                        </Select>
-                        <Select>
-                            <p>쉬움</p>
-                        </Select>
+                    <div
+                        className="subTitle"
+                        data-aos="fade-up"
+                        data-aos-duration="2000"
+                    >
+                        당신을 위한 방,
+                    </div>
+                    <div
+                        className="title"
+                        data-aos="fade-up"
+                        data-aos-delay="1000"
+                        data-aos-duration="2000"
+                    >
+                        어떤 난이도를 원하시나요?
+                    </div>
+                    <div
+                        className="selectBox"
+                        data-aos="fade-up"
+                        data-aos-delay="2000"
+                        data-aos-duration="2000"
+                    >
+                        {difficulty.map((d) => (
+                            <Select
+                                key={d.id}
+                                onClick={() =>
+                                    handleSelect("difficulty", d.name)
+                                }
+                                isSelected={selectedDifficulty === d.name}
+                            >
+                                <p>{d.name}</p>
+                            </Select>
+                        ))}
                     </div>
                 </div>
 
                 <div className="cubeBox">
-                    <Cube />
+                    <Obj3d />
                 </div>
             </Container>
 
-            <StyledLink to={`/themeRecsResult`}>
-                <StartBtn isVisible={isVisible}>
-                    <div className="startBtn">
-                        <p className="start">추천 받기</p>
-                        <div className="icon">
-                            <IoIosArrowForward />
-                        </div>
+            <StartBtn isVisible={isVisible} onClick={() => submit()}>
+                <div className="startBtn">
+                    <p className="start">추천 받기</p>
+                    <div className="icon">
+                        <IoIosArrowForward />
                     </div>
-                </StartBtn>
-            </StyledLink>
+                </div>
+            </StartBtn>
+
+            {isModal ? (
+                <StyledModal
+                    isOpen={true}
+                    shouldFocusAfterRender={false}
+                    onRequestClose={() => setIsModal(false)}
+                    style={customStyles}
+                >
+                    <div className="error">
+                        아직 선택되지 않은 문항이 있습니다.
+                    </div>
+                    <div
+                        className="okBtn"
+                        onClick={(event: React.MouseEvent<HTMLDivElement>) =>
+                            setIsModal(false)
+                        }
+                    >
+                        확인
+                    </div>
+                </StyledModal>
+            ) : null}
         </>
     );
 };

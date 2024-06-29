@@ -53,6 +53,12 @@ export const Theme = styled.div`
 
         cursor: pointer;
     }
+
+    a:visited,
+    a:link {
+        text-decoration: none;
+        color: #080101;
+    }
 `;
 
 export const StyledLink = styled(Link)`

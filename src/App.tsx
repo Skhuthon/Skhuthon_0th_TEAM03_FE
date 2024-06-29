@@ -10,7 +10,6 @@ import ThemeList from "./pages/ThemeList";
 import Navbar from "./components/Navbar";
 import UserPage from "./pages/UserPage";
 import LoginPage from "./pages/LoginPage";
-import ReviewWriting from "./pages/ReviewWriting";
 import ReviewList from "./pages/ReviewList";
 import KakaoRedirectHandler from "./pages/KakaoRedirectHandler";
 import MyPage from "./pages/MyPage";
@@ -26,7 +25,7 @@ const App: React.FC = () => {
         <Router>
             <Navbar />
             <Routes>
-                <Route path="/" element={<MainPage />} />
+                <Route path="/" element={<ThemeList />} />
                 <Route path="/themeRecs" element={<ThemeRecs />} />
                 <Route
                     path="/ThemeRecsQuestions"
@@ -35,9 +34,11 @@ const App: React.FC = () => {
                 <Route path="/themeRecsResult" element={<ThemeRecsResult />} />
                 <Route path="/userPage" element={<UserPage />} />
                 <Route path="/loginPage" element={<LoginPage />} />
-                <Route path="/auth/kakao/redirect" element={<KakaoRedirectHandler />} />
+                <Route
+                    path="/auth/kakao/redirect"
+                    element={<KakaoRedirectHandler />}
+                />
                 <Route path="/reviewList" element={<ReviewList />} />
-                <Route path="/reviewWriting" element={<ReviewWriting />} />
                 <Route path="/themeList" element={<ThemeList />} />
                 <Route path="/mypage" element={<MyPage />} />
                 <Route path="/postReview" element={<PostReview />} />

@@ -1,7 +1,13 @@
 import React from "react";
 import { Theme } from "../styles/RoomThemeStyled";
+import { ThemeProps } from "../props/ThemeProps";
 
-const RoomTheme = () => {
+const RoomTheme: React.FC<ThemeProps> = ({
+    title,
+    difficulty,
+    genre,
+    store,
+}) => {
     return (
         <Theme
             data-aos="flip-right"
@@ -9,19 +15,28 @@ const RoomTheme = () => {
             data-aos-easing="ease-out-cubic"
         >
             <div className="titleBox">
-                <p>방탈출 테마 이름</p>
+                <p>{title}</p>
             </div>
             <div className="addressBox">
-                <p>매장 정보</p>
+                <p>{store.name}</p>
             </div>
             <div className="cardFooter">
                 <div className="hashtagBox">
-                    <p>#난이도</p>
-                    <p>#장르</p>
+                    <p>#{difficulty}</p>
+                    <p>#{genre}</p>
                 </div>
-                <div className="linkBtn">
+                {/* <div className="linkBtn">
                     <p>예약 사이트</p>
-                </div>
+                </div> */}
+                <a
+                    href={store.reservationSite}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <div className="linkBtn">
+                        <p>예약</p>
+                    </div>
+                </a>
             </div>
         </Theme>
     );

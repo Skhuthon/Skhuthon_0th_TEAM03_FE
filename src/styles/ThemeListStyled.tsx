@@ -46,7 +46,7 @@ export const Container = styled.div`
         display: flex;
     }
 
-    .category {
+    /* .category {
         margin-right: 1rem;
         padding: 0.5rem 1rem;
         border: 1px solid white;
@@ -56,7 +56,7 @@ export const Container = styled.div`
     .category:hover {
         cursor: pointer;
         background: rgba(255, 255, 255, 0.3);
-    }
+    } */
 
     .themeBox {
         width: 80vw;
@@ -68,4 +68,29 @@ export const Container = styled.div`
     .paginationBox {
         margin-top: 7vh;
     }
+`;
+
+export const Select = styled.div<{ isSelected: boolean }>`
+    margin-top: 1rem;
+    margin-right: 1rem;
+    padding: 0.5rem 1.3rem;
+    font-size: 1.2rem;
+    color: white;
+    border-radius: 1rem;
+    border: 1px solid white;
+
+    background-color: ${(props) => (props.isSelected ? "#03ff8e18" : null)};
+    color: ${(props) => (props.isSelected ? "#03ff8e" : "#fff")};
+    border-color: ${(props) => (props.isSelected ? "#00ff8c" : "#fff")};
+
+    &:hover {
+        cursor: pointer;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-color: #ccc;
+    }
+
+    /* &:active {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-color: #ccc;
+    } */
 `;
