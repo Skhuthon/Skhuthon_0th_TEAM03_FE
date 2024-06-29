@@ -31,7 +31,7 @@ const Navbar = () => {
                     </div>
                 </NavLink>
 
-                <NavLink to={`/`}>
+                <NavLink to={`/loginPage`}>
                     <div className="nav">
                         <div>
                             <BsPersonFill />

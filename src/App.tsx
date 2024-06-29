@@ -5,6 +5,10 @@ import ThemeRecs from "./pages/ThemeRecs";
 import ThemeRecsQuestions from "./pages/ThemeRecsQuestions";
 import ThemeRecsResult from "./pages/ThemeRecsResult";
 import Navbar from "./components/Navbar";
+import UserPage from "./pages/UserPage";
+import LoginPage from "./pages/LoginPage";
+import ReviewWriting from "./pages/ReviewWriting";
+import ReviewList from "./pages/ReviewList";
 
 const App: React.FC = () => {
     return (
@@ -18,6 +22,11 @@ const App: React.FC = () => {
                     element={<ThemeRecsQuestions />}
                 />
                 <Route path="/themeRecsResult" element={<ThemeRecsResult />} />
+                <Route path="/userPage" element={<UserPage />} />
+                <Route path="/loginPage" element={<LoginPage />} />
+                <Route path="/auth/kakao/redirect" element={<UserPage />} />
+                <Route path="/reviewList" element={<ReviewList />} />
+                <Route path="/reviewWriting" element={<ReviewWriting />} />
             </Routes>
         </Router>
     );
