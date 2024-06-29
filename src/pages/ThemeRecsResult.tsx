@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Container, StartBtn } from "../styles/ThemeRecsResultStyled";
+import {
+    Container,
+    StartBtn,
+    StyledLink,
+} from "../styles/ThemeRecsResultStyled";
 import { IoIosArrowForward } from "react-icons/io";
 import RoomTheme from "../components/RoomTheme";
 import { useLocation } from "react-router-dom";
@@ -50,14 +54,16 @@ const ThemeRecsResult = () => {
                 )}
             </div>
 
-            <StartBtn isVisible={true}>
-                <div className="startBtn">
-                    <p className="start">홈으로</p>
-                    <div className="icon">
-                        <IoIosArrowForward />
+            <StyledLink to="/themeList">
+                <StartBtn isVisible={true}>
+                    <div className="startBtn">
+                        <p className="start">홈으로</p>
+                        <div className="icon">
+                            <IoIosArrowForward />
+                        </div>
                     </div>
-                </div>
-            </StartBtn>
+                </StartBtn>
+            </StyledLink>
         </Container>
     );
 };
