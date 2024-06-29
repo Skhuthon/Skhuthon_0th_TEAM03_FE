@@ -1,5 +1,5 @@
 import React, { useEffect, useState, KeyboardEvent, ChangeEvent } from "react";
-import { Container } from "../styles/ThemeListStyled";
+import { Container, Select } from "../styles/ThemeListStyled";
 import { useNavigate } from "react-router-dom";
 import RoomTheme2 from "../components/RoomTheme2";
 import Pagination from "../components/BasicPagination";
@@ -10,6 +10,7 @@ import { regions } from "../props/Regions";
 const ThemeList = () => {
     const [inputKeyword, setInputKeyword] = useState("");
     const [inputRegion, setInputRegion] = useState("");
+    const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
     const [take, setTake] = useState<number>(1); // 총 페이지 수
     const [page, setPage] = useState<number>(1); // 현재 페이지
     const [themeList, setThemeList] = useState<ThemeProps[]>([]);
@@ -47,6 +48,7 @@ const ThemeList = () => {
     // 지역 검색
     const handleRegionClick = (name: string) => {
         setInputRegion(name);
+        setSelectedRegion(name);
         console.log(name);
 
         const fetchData = async () => {
@@ -90,12 +92,13 @@ const ThemeList = () => {
             </div>
             <div className="categoryBox">
                 {regions.map((region) => (
-                    <div
+                    <Select
                         className="category"
                         onClick={() => handleRegionClick(region.name)}
+                        isSelected={selectedRegion === region.name}
                     >
                         {region.name}
-                    </div>
+                    </Select>
                 ))}
             </div>
 
