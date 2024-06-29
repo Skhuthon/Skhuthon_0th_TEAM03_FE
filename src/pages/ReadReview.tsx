@@ -17,25 +17,56 @@ const PostReview = () => {
         totalThemeTime: 0,
         content: "",
     });
-    
+
+    const editReview = () => {
+        navigate(`/editReview/${reviewId}`);
+    };
+
+    const delReview = () => {
+        console.log("삭제");
+        const fetchReview = async () => {
+            const token = localStorage.getItem("accessToken");
+            try {
+                const response = await axios.delete(
+                    `https://api.labyrinth30-edu.link/reviews/${reviewId}`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+
+                navigate(`/mypage`);
+                console.log(response);
+            } catch (error) {
+                console.error("Error fetching review:", error);
+            }
+        };
+
+        fetchReview();
+    };
+
     useEffect(() => {
-        const token = localStorage.getItem('accessToken');
+        const token = localStorage.getItem("accessToken");
         if (token) {
             setAccessToken(token);
         }
     }, []);
 
-
     useEffect(() => {
         const fetchReview = async () => {
-        const token = localStorage.getItem('accessToken');
+            const token = localStorage.getItem("accessToken");
             try {
-                const response = await axios.get(`https://api.labyrinth30-edu.link/reviews/${reviewId}`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
+                const response = await axios.get(
+                    `https://api.labyrinth30-edu.link/reviews/${reviewId}`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
                     }
-            });
+                );
                 setReview(response.data);
+                console.log(response.data);
             } catch (error) {
                 console.error("Error fetching review:", error);
             }
@@ -53,13 +84,13 @@ const PostReview = () => {
             <div className="postBox">
                 <div className="btnBox">
                     <StartBtn isVisible={true}>
-                        <div className="startBtn">
+                        <div className="startBtn" onClick={editReview}>
                             <p className="start">수정</p>
                         </div>
                     </StartBtn>
 
                     <StartBtn isVisible={true}>
-                        <div className="startBtn">
+                        <div className="startBtn" onClick={delReview}>
                             <p className="start">삭제</p>
                         </div>
                     </StartBtn>
@@ -71,7 +102,7 @@ const PostReview = () => {
                 </div>
                 <div className="posting">
                     <p className="postTitle">성공 여부</p>
-                    <p className="read">{review.isSuccess}</p>
+                    <p className="read">{review.isSuccess ? "성공" : "실패"}</p>
                 </div>
                 <div className="posting">
                     <p className="postTitle">인원 수</p>
@@ -82,8 +113,12 @@ const PostReview = () => {
                     <p className="read">{review.numberOfHintsUsed} 개</p>
                 </div>
                 <div className="posting">
+                    <p className="postTitle">테마 시간</p>
+                    <p className="read">{review.totalThemeTime} 분</p>
+                </div>
+                <div className="posting">
                     <p className="postTitle">남은 시간</p>
-                    <p className="read">{review.remainingTime} 분</p>
+                    <p className="read">{review.remainingTime} 초</p>
                 </div>
                 <div className="posting">
                     <p className="postTitle">한 줄 리뷰</p>

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -83,5 +84,17 @@ export const StartBtn = styled.div<{ isVisible: boolean }>`
         display: flex;
         justify-content: flex-end;
         align-items: center;
+    }
+`;
+
+export const StyledLink = styled(Link)`
+    text-decoration: none;
+
+    &:focus,
+    &:hover,
+    &:visited,
+    &:link,
+    &:active {
+        text-decoration: none;
     }
 `;

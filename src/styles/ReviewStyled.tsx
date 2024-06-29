@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Review = styled.div`
@@ -53,5 +54,17 @@ export const Review = styled.div`
 
     &:hover {
         cursor: pointer;
+    }
+`;
+
+export const StyledLink = styled(Link)`
+    text-decoration: none;
+
+    &:focus,
+    &:hover,
+    &:visited,
+    &:link,
+    &:active {
+        text-decoration: none;
     }
 `;
