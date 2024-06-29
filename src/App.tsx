@@ -25,7 +25,7 @@ const App: React.FC = () => {
         <Router>
             <Navbar />
             <Routes>
-                <Route path="/" element={<MainPage />} />
+                <Route path="/" element={<ThemeList />} />
                 <Route path="/themeRecs" element={<ThemeRecs />} />
                 <Route
                     path="/ThemeRecsQuestions"
