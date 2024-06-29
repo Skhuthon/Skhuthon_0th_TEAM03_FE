@@ -7,7 +7,8 @@ const KakaoLogin: React.FC = () => {
     const loginWithKakao = () => {
         if (window.Kakao && window.Kakao.Auth) {
             window.Kakao.Auth.authorize({
-                redirectUri: "http://localhost:3000/auth/kakao/redirect", // 설정한 리디렉션 URI 입력
+                // redirectUri: "http://localhost:3000/auth/kakao/redirect", // 설정한 리디렉션 URI 입력
+                redirectUri: "https://bangpro.vercel.app/auth/kakao/redirect", // 설정한 리디렉션 URI 입력
             });
         } else {
             console.error("Kakao SDK가 초기화되지 않았습니다.");
