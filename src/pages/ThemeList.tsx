@@ -3,13 +3,17 @@ import { Container } from "../styles/ThemeListStyled";
 import { useNavigate } from "react-router-dom";
 import RoomTheme2 from "../components/RoomTheme2";
 import Pagination from "../components/BasicPagination";
+import { getThemeList } from "../api/ThemeListApi";
+import { ThemeProps } from "../props/ThemeProps";
 
 const ThemeList = () => {
     const navigate = useNavigate();
     const [inputKeyword, setInputKeyword] = useState("");
     const [searchKeyword, setSearchKeyword] = useState("");
-    const [totalPages, setTotalPages] = useState<number>(10); // 총 페이지 수
-    const [page, setPage] = useState<number>(0); // 현재 페이지
+    const [take, setTake] = useState<number>(1); // 총 페이지 수
+    const [page, setPage] = useState<number>(1); // 현재 페이지
+
+    const [themeList, setThemeList] = useState<ThemeProps[]>([]);
 
     const handleInputKeyword = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputKeyword(event.target.value);
@@ -34,8 +38,19 @@ const ThemeList = () => {
         event: React.ChangeEvent<unknown>,
         value: number
     ) => {
-        setPage(value - 1); // 페이지 변경 시 현재 페이지 상태 업데이트
+        setPage(value); // 페이지 변경 시 현재 페이지 상태 업데이트
     };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const themes = await getThemeList(page, "", "");
+            setThemeList(themes.data);
+            setTake(themes.totalPages);
+            console.log(themes);
+        };
+
+        fetchData();
+    }, [page]);
 
     return (
         <Container>
@@ -67,18 +82,20 @@ const ThemeList = () => {
             </div>
 
             <div className="themeBox">
-                <RoomTheme2 />
-                <RoomTheme2 />
-                <RoomTheme2 />
-                <RoomTheme2 />
-                <RoomTheme2 />
-                <RoomTheme2 />
+                {themeList?.map((theme) => (
+                    <RoomTheme2
+                        title={theme.title}
+                        difficulty={theme.difficulty}
+                        genre={theme.genre}
+                        store={theme.store}
+                    />
+                ))}
             </div>
 
             <div className="paginationBox">
                 <Pagination
-                    count={totalPages}
-                    page={page + 1}
+                    count={take}
+                    page={page}
                     onChange={handleChangePage}
                 />
             </div>
