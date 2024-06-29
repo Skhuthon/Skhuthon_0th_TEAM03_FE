@@ -51,6 +51,12 @@ export const Container = styled.div`
         display: flex;
         justify-content: center;
     }
+
+    .notFound {
+        margin-top: 5vh;
+        color: white;
+        font-size: 1.3rem;
+    }
 `;
 
 export const StartBtn = styled.div<{ isVisible: boolean }>`

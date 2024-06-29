@@ -8,6 +8,7 @@ export const Container = styled.div`
 
     position: fixed;
     top: 0;
+    z-index: 2;
 
     display: flex;
     justify-content: space-between;
@@ -36,6 +37,10 @@ export const Container = styled.div`
 
 export const NavLink = styled(Link)`
     text-decoration: none;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     .nav {
         display: flex;

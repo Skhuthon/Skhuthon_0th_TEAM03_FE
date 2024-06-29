@@ -8,9 +8,11 @@ import { BsPersonFill } from "react-icons/bs";
 const Navbar = () => {
     return (
         <Container>
-            <div className="logoBox">
-                <img src={logo} alt="logo" className="logo"></img>
-            </div>
+            <NavLink to={`/themeList`}>
+                <div className="logoBox">
+                    <img src={logo} alt="logo" className="logo"></img>
+                </div>
+            </NavLink>
 
             <div className="navBox">
                 <NavLink to={`/themeRecs`}>
