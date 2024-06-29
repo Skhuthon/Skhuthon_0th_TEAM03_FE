@@ -13,6 +13,9 @@ import LoginPage from "./pages/LoginPage";
 import ReviewWriting from "./pages/ReviewWriting";
 import ReviewList from "./pages/ReviewList";
 import KakaoRedirectHandler from "./pages/KakaoRedirectHandler";
+import MyPage from "./pages/MyPage";
+import PostReview from "./pages/PostReview";
+import ReadReview from "./pages/ReadReview";
 
 const App: React.FC = () => {
     useEffect(() => {
@@ -36,6 +39,9 @@ const App: React.FC = () => {
                 <Route path="/reviewList" element={<ReviewList />} />
                 <Route path="/reviewWriting" element={<ReviewWriting />} />
                 <Route path="/themeList" element={<ThemeList />} />
+                <Route path="/mypage" element={<MyPage />} />
+                <Route path="/postReview" element={<PostReview />} />
+                <Route path="/readReview" element={<ReadReview />} />
             </Routes>
         </Router>
     );

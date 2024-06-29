@@ -1,10 +1,12 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
-export const Theme = styled.div`
-    width: 15vw;
-    height: 20vh;
-    padding: 1.5vh 2vw;
+export const Review = styled.div`
+    width: 35vw;
+    height: 10vh;
+
+    background-color: #3b3b3b;
+
+    padding: 6vh 2vw;
     margin: 1vh 0.5vw;
 
     display: flex;
@@ -28,6 +30,11 @@ export const Theme = styled.div`
         font-size: 1rem;
     }
 
+    .contentBox > p {
+        margin-top: 1rem;
+        font-size: 1rem;
+    }
+
     .cardFooter {
         width: inherit;
         margin-top: 1.5rem;
@@ -44,30 +51,7 @@ export const Theme = styled.div`
         margin-right: 1rem;
     }
 
-    .linkBtn {
-        padding: 0.2rem 1rem;
-        border-radius: 1rem;
-        color: #080101;
-        background-color: #03ff8d;
-
+    &:hover {
         cursor: pointer;
-    }
-
-    a:visited,
-    a:link {
-        text-decoration: none;
-        color: #080101;
-    }
-`;
-
-export const StyledLink = styled(Link)`
-    text-decoration: none;
-
-    &:focus,
-    &:hover,
-    &:visited,
-    &:link,
-    &:active {
-        text-decoration: none;
     }
 `;
